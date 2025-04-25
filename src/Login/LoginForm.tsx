@@ -8,7 +8,7 @@ const LoginForm = () => {
   const { pathname } = useLocation();
 
   if (isAuth) return <Navigate to="/dashboard" replace />;
-  if (pathname === "/Login") return <Navigate to="SignIn" />;
+  if (pathname === "/Login" || pathname === "/Login/") return <Navigate to="SignIn" />;
   return (
     <div className="Layout">
       <GraphicalUI />

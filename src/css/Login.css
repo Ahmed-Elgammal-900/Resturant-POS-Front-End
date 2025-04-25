@@ -1,3 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+:root{
+    font-family: 'poppins';
+}
 form{
     display: flex;
     flex-direction: column;
@@ -19,6 +23,14 @@ form{
     margin-bottom: 80px;
 }
 
+.form-grouper label{
+    font-weight: 500;
+}
+
+.form-grouper label:last-of-type{
+    margin-top: 10px;
+}
+
 .form-grouper input{
     padding: 4px;
     padding-left: 20px;
@@ -30,11 +42,13 @@ form{
     -o-border-radius: 8px;
     background-color: #F8F8F7;
     border: none;
-    font-size: 16px;
+    font-size: 17px;
+    font-weight: 500;
 }
 
 .form-grouper input::placeholder{
     color: #808080;
+    font-family: 'poppins';
 }
 
 .form-grouper input:focus::placeholder{
@@ -54,7 +68,7 @@ form{
     color: rgb(0, 148, 253);
 }
 
-.form-grouper button{
+.form-grouper .submit-button{
     height: 45px;
     margin-top: 30px;
     border-radius: 7px;
@@ -70,9 +84,11 @@ form{
     -ms-transition: 0.3s ease;
     -o-transition: 0.3s ease;
     font-size: 17px;
+    font-weight: 600;
+    font-family: 'poppins';
 }
 
-.form-grouper button:hover{
+.form-grouper .submit-button:hover{
     cursor: pointer;
     transform: scale(0.98);
     -webkit-transform: scale(0.98);
@@ -97,5 +113,34 @@ form{
     margin-top: 10px;
     margin-bottom: 20px;
     color: #808080;
+}
+
+p.massege-box{
+    color: red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 0, 0, 0.237);
+    height: 20px;
+    padding: 10px;
+    padding-top: 12px;
+    padding-bottom: 12px;
+    padding-left: 15px;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    font-size: 15px;
+}
+
+.delete{
+    color: red;
+    border: none;
+    background: transparent;
+}
+
+.delete:hover{
+    cursor: pointer;
 }
 
