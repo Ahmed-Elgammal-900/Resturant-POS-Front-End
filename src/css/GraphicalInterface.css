@@ -1,0 +1,20 @@
+.title{
+    margin-top: 40px;
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.title h2{
+    margin-left: 20px;
+}
+
+.icon{
+    background-color: white;
+    padding: 10px;
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+}
