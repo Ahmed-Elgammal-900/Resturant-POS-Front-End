@@ -5,21 +5,21 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
 const SignUp = () => {
-  const [formInfo, setInfo] = useState({ email: "", password: "" });
+  const [formInfo, setInfo] = useState({ email: "", password: "", user: "" });
 
   const onChange = (e: any) => {
     const { name, value } = e.target;
     setInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  const { handleAuth, massege, setMassege } = useAuth();
+  const { SignUp, massege, setMassege } = useAuth();
 
   const onMassegeClick = (e: any) => {
     e.preventDefault();
     setMassege("");
   };
   return (
-    <form onSubmit={(e) => handleAuth(e, formInfo)}>
+    <form onSubmit={(e) => SignUp(e, formInfo)}>
       <div className="form-grouper">
         <h1>Get Started</h1>
         <p>
@@ -44,6 +44,13 @@ const SignUp = () => {
           value={formInfo.email}
           formNoValidate
         />
+        <label htmlFor="job" style={{marginBottom: '10px'}}>Job</label>
+        <select name="user" id="job" onChange={onChange} defaultValue="">
+          <option value="" disabled>Select Job</option>
+          <option value="cashier">cashier</option>
+          <option value="chief">chief</option>
+          <option value="manager">manager</option>
+        </select>
         <label htmlFor="password">Password</label>
         <input
           type="password"

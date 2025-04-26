@@ -11,13 +11,13 @@ const SignIn = () => {
     setInfo((prev) => ({ ...prev, [name]: value }));
   };
 
-  const { handleAuth, massege, setMassege } = useAuth();
+  const { SignIn, massege, setMassege } = useAuth();
   const onMassegeClick = (e: any) => {
     e.preventDefault()
     setMassege("");
   };
   return (
-    <form onSubmit={(e) => handleAuth(e, formInfo)}>
+    <form onSubmit={(e) => SignIn(e, formInfo)}>
       <div className="form-grouper">
         <h1>Welcome Back!</h1>
         <p>

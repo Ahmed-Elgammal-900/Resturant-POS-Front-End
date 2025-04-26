@@ -144,3 +144,24 @@ p.massege-box{
     cursor: pointer;
 }
 
+select{
+    height: 45px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: 'poppins';
+    background-color:#F8F8F7;
+    border: none;
+    border-radius: 6px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+    font-size: 15px;
+    font-weight: 500;
+    color: black;
+}
+
+select:focus{
+    outline: none;
+}
+

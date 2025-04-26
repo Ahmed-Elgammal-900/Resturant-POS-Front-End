@@ -1,15 +1,18 @@
 import { createContext, useContext, useEffect, useState } from "react";
+
 type AuthContextType = {
   isAuth: boolean;
   user: string;
-  handleAuth: any;
+  SignUp: any;
+  SignIn: any;
   massege: string;
   setMassege: any;
 };
 const AuthContext = createContext<AuthContextType>({
   isAuth: false,
   user: "",
-  handleAuth: () => Promise<void>,
+  SignUp: () => Promise<void>,
+  SignIn: () => Promise<void>,
   massege: "",
   setMassege: () => {},
 });
@@ -26,21 +29,56 @@ export const Auth = ({ children }: any) => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch(import.meta.env.VITE_API_URL, {
-        method: "POST",
+      const response = await fetch("http://localhost:3000/auth/status", {
+        method: "GET",
         credentials: "include",
       });
       const data = await response.json();
-      const { isAuth, user, massege } = JSON.parse(data);
+      if (response.ok) {
+        const { isAuth, user } = JSON.parse(data);
+        setAuth(isAuth);
+        setUser(user);
+      }
+    } catch (error: any) {
+      if (error.statusCode !== 401) {
+        console.error(error);
+      }
+    }
+  };
+
+  const SignUp = async (
+    e: any,
+    formInfo: { email: string; password: string; user: string }
+  ) => {
+    e.preventDefault();
+    const validaEmail = formInfo.email.match(
+      /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/
+    );
+    if (!validaEmail || !formInfo.password) {
+      setMassege("invalid Email or Password");
+      return;
+    } else {
+      setMassege("");
+    }
+    try {
+      const response = await fetch("http://localhost:3000/auth/SignUp", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formInfo),
+        credentials: "include",
+      });
+
+      const { user, isAuth } = await response.json();
       setAuth(isAuth);
       setUser(user);
-      setMassege(massege);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleAuth = async (
+  const SignIn = async (
     e: any,
     formInfo: { email: string; password: "string" }
   ) => {
@@ -50,21 +88,22 @@ export const Auth = ({ children }: any) => {
     );
     if (!validaEmail || !formInfo.password) {
       setMassege("invalid Email or Password");
-      return
-    }else{
-      setMassege('')
+      return;
+    } else {
+      setMassege("");
     }
     try {
-      const response = await fetch(import.meta.env.VITE_API_URL, {
+      const response = await fetch("http://localhost:3000/auth/SignIn", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formInfo),
+        credentials: "include",
       });
 
-      const { user } = await response.json();
-      setAuth(true);
+      const { user, isAuth } = await response.json();
+      setAuth(isAuth);
       setUser(user);
     } catch (error) {
       console.error(error);
@@ -75,7 +114,8 @@ export const Auth = ({ children }: any) => {
       value={{
         isAuth: isAuth,
         user: user,
-        handleAuth: handleAuth,
+        SignUp: SignUp,
+        SignIn: SignIn,
         massege: massege,
         setMassege: setMassege,
       }}
