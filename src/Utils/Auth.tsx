@@ -29,10 +29,13 @@ export const Auth = ({ children }: any) => {
 
   const checkAuth = async () => {
     try {
-      const response = await fetch("http://localhost:3000/auth/status", {
-        method: "GET",
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/status`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
       const data = await response.json();
       if (response.ok) {
         const { isAuth, user } = JSON.parse(data);
@@ -61,14 +64,17 @@ export const Auth = ({ children }: any) => {
       setMassege("");
     }
     try {
-      const response = await fetch("http://localhost:3000/auth/SignUp", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formInfo),
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/SignUp`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formInfo),
+          credentials: "include",
+        }
+      );
 
       const { user, isAuth } = await response.json();
       setAuth(isAuth);
@@ -93,14 +99,17 @@ export const Auth = ({ children }: any) => {
       setMassege("");
     }
     try {
-      const response = await fetch("http://localhost:3000/auth/SignIn", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formInfo),
-        credentials: "include",
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/auth/SignIn`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formInfo),
+          credentials: "include",
+        }
+      );
 
       const { user, isAuth } = await response.json();
       setAuth(isAuth);
