@@ -38,9 +38,10 @@ export const Auth = ({ children }: any) => {
       );
       const data = await response.json();
       if (response.ok) {
-        const { isAuth, user } = JSON.parse(data);
-        setAuth(isAuth);
-        setUser(user);
+        // const { isAuth, user } = JSON.parse(data);
+        // setAuth(isAuth);
+        // setUser(user);
+        console.log(data)
       }
     } catch (error: any) {
       if (error.statusCode !== 401) {
