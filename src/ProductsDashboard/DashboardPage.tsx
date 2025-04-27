@@ -34,9 +34,9 @@ const DashboardPage = () => {
     setProducts(products);
   };
 
-  if (products.length === 0 || categories.length === 0) {
-    return <h1>"loading"</h1>;
-  }
+  // if (products.length === 0 || categories.length === 0) {
+  //   return <h1>"loading"</h1>;
+  // }
   const [firstCategory] = categories;
   return (
     <>
