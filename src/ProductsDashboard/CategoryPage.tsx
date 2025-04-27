@@ -7,7 +7,7 @@ const CategoryPage = ({ category, products }: any) => {
       ({ category: category2 }: any) => category2 === category
     );
     setItems(items);
-  }, [products, category]);
+  }, [products.length, category]);
   return (
     <div className="grid-layout">
       {items.map(({ name, price }) => (
