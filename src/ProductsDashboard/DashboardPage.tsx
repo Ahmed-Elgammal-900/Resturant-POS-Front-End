@@ -33,6 +33,10 @@ const DashboardPage = () => {
     const products = await productsData.json();
     setProducts(products);
   };
+
+  if (products.length === 0 || categories.length === 0) {
+    return <h1>"loading"</h1>;
+  }
   const [firstCategory] = categories;
   return (
     <>
