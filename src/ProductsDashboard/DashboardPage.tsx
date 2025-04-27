@@ -6,7 +6,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import "../css/Dashboard.css";
 import { useEffect, useState } from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route, NavLink, Navigate } from "react-router-dom";
 import CategoryPage from "./CategoryPage";
 
 const DashboardPage = () => {
@@ -33,6 +33,7 @@ const DashboardPage = () => {
     const products = await productsData.json();
     setProducts(products);
   };
+  const [firstCategory] = categories;
   return (
     <>
       <div className="header">
@@ -71,6 +72,7 @@ const DashboardPage = () => {
               element={<CategoryPage category={category} products={products} />}
             />
           ))}
+          <Route path="/dashboard" element={<Navigate to={firstCategory} />} />
         </Routes>
       </div>
     </>
