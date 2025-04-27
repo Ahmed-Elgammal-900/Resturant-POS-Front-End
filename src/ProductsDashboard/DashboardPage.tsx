@@ -3,6 +3,7 @@ import {
   faBagShopping,
   faBars,
   faBriefcase,
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import "../css/Dashboard.css";
 import { useEffect, useState } from "react";
@@ -81,7 +82,9 @@ const DashboardPage = () => {
           </div>
         </>
       ) : (
-        <h1>Loding</h1>
+        <div className="loading">
+          <FontAwesomeIcon icon={faSpinner} spinPulse />
+        </div>
       )}
     </>
   );

@@ -62,7 +62,7 @@
 
 .links a.active{
     background-color: #ffca40;
-    color: black;
+    color: #C8161D;
 }
 
 .links a{
@@ -79,7 +79,7 @@
 
 .links a:hover{
     background-color: #ffca40;
-    color: black;
+    color: #C8161D;
 }
 
 .links{
@@ -88,4 +88,13 @@
     align-items: center;
     gap: 10px;
     margin-top: 25px;
+}
+
+.loading{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 140.63px) !important;
+    font-size: 65px;
+    color: #C8161D;
 }
