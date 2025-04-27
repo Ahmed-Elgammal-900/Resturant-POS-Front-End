@@ -33,10 +33,6 @@ const DashboardPage = () => {
     const products = await productsData.json();
     setProducts(products);
   };
-
-  // if (products.length === 0 || categories.length === 0) {
-  //   return <h1>"loading"</h1>;
-  // }
   const [firstCategory] = categories;
   return (
     <>
@@ -57,28 +53,36 @@ const DashboardPage = () => {
           </button>
         </div>
       </div>
-      <div className="links">
-        {categories.map((category) => (
-          <NavLink
-            to={`/dashboard/${category}`}
-            className={({ isActive }) => (isActive ? "active" : "")}
-          >
-            {category}
-          </NavLink>
-        ))}
-      </div>
+      {!(products.length === 0 || categories.length === 0) ? (
+        <>
+          <div className="links">
+            {categories.map((category) => (
+              <NavLink
+                to={`/dashboard/${category}`}
+                className={({ isActive }) => (isActive ? "active" : "")}
+              >
+                {category}
+              </NavLink>
+            ))}
+          </div>
 
-      <div className="pages">
-        <Routes>
-          {categories.map((category) => (
-            <Route
-              path={category}
-              element={<CategoryPage category={category} products={products} />}
-            />
-          ))}
-          <Route path="/" element={<Navigate to={firstCategory} />} />
-        </Routes>
-      </div>
+          <div className="pages">
+            <Routes>
+              {categories.map((category) => (
+                <Route
+                  path={category}
+                  element={
+                    <CategoryPage category={category} products={products} />
+                  }
+                />
+              ))}
+              <Route path="/" element={<Navigate to={firstCategory} />} />
+            </Routes>
+          </div>
+        </>
+      ) : (
+        <h1>Loding</h1>
+      )}
     </>
   );
 };
