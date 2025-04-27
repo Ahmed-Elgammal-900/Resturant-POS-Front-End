@@ -10,12 +10,12 @@ const App = () => {
       <BrowserRouter>
         <Routes>
           <Route path="*" element={<Navigate to="/dashboard" />} />
-          <Route path="/" element={<Navigate to="dashboard" />}/>
+          <Route path="/" element={<Navigate to="dashboard" />} />
           <Route path="Login" element={<LoginForm />}>
-            <Route path="SignUp" element={<SignUp />}/>
-            <Route path="SignIn" element={<SignIn />}/>
+            <Route path="SignUp" element={<SignUp />} />
+            <Route path="SignIn" element={<SignIn />} />
           </Route>
-          <Route path="/dashboard" element={<ProtectedRoute />} />
+          <Route path="/dashboard/*" element={<ProtectedRoute />} />
         </Routes>
       </BrowserRouter>
     </Auth>
