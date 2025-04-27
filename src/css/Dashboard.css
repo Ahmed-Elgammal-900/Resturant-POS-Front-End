@@ -62,7 +62,7 @@
 
 .links a.active{
     background-color: #ffca40;
-    color: #C8161D;
+    color:  black ;
 }
 
 .links a{
@@ -79,7 +79,7 @@
 
 .links a:hover{
     background-color: #ffca40;
-    color: #C8161D;
+    color: black;
 }
 
 .links{
