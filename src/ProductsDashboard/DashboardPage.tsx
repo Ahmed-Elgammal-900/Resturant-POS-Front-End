@@ -76,7 +76,7 @@ const DashboardPage = () => {
               element={<CategoryPage category={category} products={products} />}
             />
           ))}
-          <Route path="/dashboard" element={<Navigate to={firstCategory} />} />
+          <Route path="/" element={<Navigate to={firstCategory} />} />
         </Routes>
       </div>
     </>
