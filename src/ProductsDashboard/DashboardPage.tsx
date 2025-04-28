@@ -128,10 +128,12 @@ const DashboardPage = () => {
         <button
           className="payment"
           onClick={() => handleCheckout(true)}
-          disabled={cart.reduce(
-            (acc: number, { count, price }: any) => acc + price * count,
-            0
-          ) === 0}
+          disabled={
+            cart.reduce(
+              (acc: number, { count, price }: any) => acc + price * count,
+              0
+            ) === 0
+          }
         >
           Payment
         </button>
