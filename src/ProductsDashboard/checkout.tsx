@@ -61,8 +61,13 @@ const Checkout = ({ isActive, setCheckout }: any) => {
     target.value = value;
   };
 
-  const { isLoading, responseMassege, customerNumber, removeMassege }: any =
-    useCart();
+  const {
+    isLoading,
+    responseMassege,
+    customerNumber,
+    removeMassege,
+    payment,
+  }: any = useCart();
 
   return (
     <>
@@ -126,7 +131,7 @@ const Checkout = ({ isActive, setCheckout }: any) => {
                   required
                 />
               </div>
-              <button type="button" disabled={!validCard}>
+              <button type="button" disabled={!validCard} onClick={payment}>
                 Pay
               </button>
             </div>
