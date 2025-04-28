@@ -24,8 +24,8 @@ const AuthContext = createContext<AuthContextType>({
 export const useAuth = () => useContext<AuthContextType>(AuthContext);
 
 export const Auth = ({ children }: any) => {
-  const [isAuth, setAuth] = useState<boolean>(!false);
-  const [user, setUser] = useState<string>("cashier");
+  const [isAuth, setAuth] = useState<boolean>(false);
+  const [user, setUser] = useState<string>("");
   const [massege, setMassege] = useState<string>("");
   useEffect(() => {
     checkAuth();
