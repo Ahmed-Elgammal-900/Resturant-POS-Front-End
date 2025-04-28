@@ -76,7 +76,6 @@ export const Cart = ({ children }: any) => {
     cart.forEach((product: any) => delete product.price);
 
     const body = { data: cart, customerNumber: customerNumber };
-    console.log(JSON.stringify(body))
     sendOrder(body);
   };
 
@@ -88,15 +87,14 @@ export const Cart = ({ children }: any) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
         credentials: "include",
       });
 
-      const result = await response.body;
-      console.log(result)
-      return
+      const result = await response.json();
       setCart([]);
-      // setResponse(JSON.parse(result));
+      setResponse(result);
       setLoading(false);
     } catch (error) {
       setMassege("Failed");
