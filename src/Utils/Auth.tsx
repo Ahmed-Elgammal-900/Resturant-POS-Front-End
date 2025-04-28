@@ -142,8 +142,8 @@ export const Auth = ({ children }: any) => {
         credentials: "include",
       });
       const data = await response.json();
-      window.location.reload();
       console.log(data);
+      window.location.reload();
     } catch (error) {
       console.error(error);
     }
