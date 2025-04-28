@@ -92,6 +92,8 @@ export const Cart = ({ children }: any) => {
       });
 
       const result = await response.json();
+      console.log(result)
+      return
       setCart([]);
       setResponse(JSON.parse(result));
       setLoading(false);
