@@ -91,11 +91,11 @@ export const Cart = ({ children }: any) => {
         credentials: "include",
       });
 
-      const result = await response.json();
+      const result = await response.body;
       console.log(result)
       return
       setCart([]);
-      setResponse(JSON.parse(result));
+      // setResponse(JSON.parse(result));
       setLoading(false);
     } catch (error) {
       setMassege("Failed");
