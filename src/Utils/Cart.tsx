@@ -76,6 +76,7 @@ export const Cart = ({ children }: any) => {
     cart.forEach((product: any) => delete product.price);
 
     const body = { data: cart, customerNumber: customerNumber };
+    console.log(JSON.stringify(body))
     sendOrder(body);
   };
 
