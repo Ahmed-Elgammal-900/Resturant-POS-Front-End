@@ -7,6 +7,8 @@ type AuthContextType = {
   SignIn: any;
   massege: string;
   setMassege: any;
+  Logout: any;
+  deleteAccount: any;
 };
 const AuthContext = createContext<AuthContextType>({
   isAuth: false,
@@ -15,13 +17,15 @@ const AuthContext = createContext<AuthContextType>({
   SignIn: () => Promise<void>,
   massege: "",
   setMassege: () => {},
+  Logout: () => {},
+  deleteAccount: () => {},
 });
 
 export const useAuth = () => useContext<AuthContextType>(AuthContext);
 
 export const Auth = ({ children }: any) => {
-  const [isAuth, setAuth] = useState<boolean>(false);
-  const [user, setUser] = useState<string>("");
+  const [isAuth, setAuth] = useState<boolean>(!false);
+  const [user, setUser] = useState<string>("cashier");
   const [massege, setMassege] = useState<string>("");
   useEffect(() => {
     checkAuth();
@@ -43,9 +47,9 @@ export const Auth = ({ children }: any) => {
         setUser(user);
       }
     } catch (error: any) {
-      if (error.statusCode !== 401) {
-        console.error(error);
-      }
+      console.error(error);
+      setAuth(false);
+      setUser("");
     }
   };
 
@@ -118,6 +122,31 @@ export const Auth = ({ children }: any) => {
       console.error(error);
     }
   };
+
+  const logout = async () => {
+    try {
+      await fetch(`${import.meta.env.VITE_API_URL}/auth/Logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const deleteAccount = async () => {
+    try {
+      await fetch(`${import.meta.env.VITE_API_URL}/auth`, {
+        method: "DELETE",
+        credentials: "include",
+      });
+      window.location.reload();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -127,6 +156,8 @@ export const Auth = ({ children }: any) => {
         SignIn: SignIn,
         massege: massege,
         setMassege: setMassege,
+        Logout: logout,
+        deleteAccount: deleteAccount,
       }}
     >
       {children}

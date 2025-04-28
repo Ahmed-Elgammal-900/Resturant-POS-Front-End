@@ -1,0 +1,127 @@
+.card-inputs {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-inputs label {
+  margin-bottom: 6px;
+}
+
+.card-number {
+  display: flex;
+  flex-direction: column;
+}
+
+.card-number .input {
+  display: flex;
+  background-color: #f8f8f7;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  align-items: center;
+}
+
+.card-number .input input {
+  border: none;
+  background-color: transparent;
+  font-size: 17px;
+  width: 100%;
+}
+
+.card-number .input input::placeholder {
+  color: #808080;
+}
+
+.card-number .input input:focus {
+  outline: none;
+}
+
+.card-number .input input:focus::placeholder {
+  color: transparent;
+}
+
+.expire {
+  margin: 10px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.expire input {
+  border: none;
+  background-color: #f8f8f7;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+
+.expire input:focus {
+  outline: none;
+}
+
+.cvv {
+  display: flex;
+  flex-direction: column;
+}
+
+.cvv input {
+  border: none;
+  background-color: #f8f8f7;
+  padding: 10px;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  font-size: 17px;
+}
+
+.cvv input::placeholder {
+  color: #808080;
+}
+
+.cvv input:focus {
+  outline: none;
+}
+
+.cvv input:focus::placeholder {
+  color: transparent;
+}
+
+.checkout .card-inputs button {
+  width: 100%;
+  height: 40px;
+}
+
+.checkout .card-inputs button{
+    border: none;
+    background-color: #ffca40;
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    -ms-border-radius: 4px;
+    -o-border-radius: 4px;
+    font-family: 'poppins';
+    font-weight: 600;
+    font-size: 16px;
+    margin-top: 130px;
+}
+
+.checkout .card-inputs button:hover{
+    cursor: pointer;
+    background-color: #ffcc4a;
+}
+
+.checkout .card-inputs button:active{
+    background-color: #ffc227;
+}
+
+.checkout .card-inputs button:disabled{
+    cursor: not-allowed;
+    background-color: gray;
+}

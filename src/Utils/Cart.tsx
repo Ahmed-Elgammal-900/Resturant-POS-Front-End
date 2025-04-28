@@ -1,0 +1,100 @@
+import { createContext, useContext, useEffect, useState } from "react";
+
+const cartContext: any = createContext([]);
+
+export const useCart = () => useContext(cartContext);
+
+export const Cart = ({ children }: any) => {
+  const [cart, setCart] = useState(() => {
+    try {
+      const savedCart = localStorage.getItem("cart");
+      return savedCart ? JSON.parse(savedCart) : []; // Default to empty array if no saved cart
+    } catch (error) {
+      console.error("Error reading from localStorage:", error);
+      return []; // Return empty array in case of an error
+    }
+  });
+  const [resultMassege, setMassege] = useState("");
+  //   useEffect(() => {
+  //     if (localStorage.getItem("cart")) {
+  //       const cartStored: any = localStorage.getItem("cart");
+  //       setCart(JSON.parse(cartStored));
+  //     }
+  //   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+  const addToCart = ({ name, price }: any) => {
+    const exist = cart.some(({ name: name1 }: any) => name1 === name);
+    if (exist) {
+      setCart((prev: any) =>
+        prev.map((product: any) =>
+          product.name === name
+            ? { ...product, count: product.count + 1 }
+            : product
+        )
+      );
+    } else {
+      setCart((prev: any) => [...prev, { name: name, price: price, count: 1 }]);
+    }
+  };
+
+  const increaseCount = (name: string) => {
+    setCart((prev: any) =>
+      prev.map((product: any) =>
+        product.name === name
+          ? { ...product, count: product.count + 1 }
+          : product
+      )
+    );
+  };
+
+  const decreaseCount = (name: string, count: number) => {
+    if (count === 1) {
+      setCart(cart.filter(({ name: name1 }: any) => name1 !== name));
+    }
+    setCart((prev: any) =>
+      prev.map((product: any) =>
+        product.name === name
+          ? { ...product, count: product.count - 1 }
+          : product
+      )
+    );
+  };
+
+  const payment = () => {};
+
+  const sendOrder = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
+        method: "POST",
+        body: JSON.stringify(cart),
+        credentials: "include",
+      });
+
+      const result = await response.json();
+
+      setMassege(result);
+    } catch (error) {
+      setMassege("Failed");
+      console.error(error);
+    }
+  };
+
+  return (
+    <cartContext.Provider
+      value={{
+        cart: cart,
+        resultMassege: resultMassege,
+        addToCart: addToCart,
+        increaseCount: increaseCount,
+        decreaseCount: decreaseCount,
+        sendOrder: sendOrder,
+      }}
+    >
+      {children}
+    </cartContext.Provider>
+  );
+};
