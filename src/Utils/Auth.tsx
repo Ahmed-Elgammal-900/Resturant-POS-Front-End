@@ -137,11 +137,13 @@ export const Auth = ({ children }: any) => {
 
   const deleteAccount = async () => {
     try {
-      await fetch(`${import.meta.env.VITE_API_URL}/auth`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth`, {
         method: "DELETE",
         credentials: "include",
       });
+      const data = await response.json();
       window.location.reload();
+      console.log(data);
     } catch (error) {
       console.error(error);
     }
