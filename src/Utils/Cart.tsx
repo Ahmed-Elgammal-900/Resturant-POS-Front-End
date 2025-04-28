@@ -73,11 +73,9 @@ export const Cart = ({ children }: any) => {
     setLoading(true);
     const customerNumber = Math.ceil(Math.random() * 100);
     setNumber(customerNumber);
-    const productsToSend = cart.map((product: any) => delete product.price);
+    cart.forEach((product: any) => delete product.price);
 
-    console.log(productsToSend);
-
-    const body = { data: productsToSend, customerNumber: customerNumber };
+    const body = { data: cart, customerNumber: customerNumber };
     sendOrder(body);
   };
 
@@ -95,7 +93,7 @@ export const Cart = ({ children }: any) => {
 
       const result = await response.json();
       setCart([]);
-      setResponse(result);
+      setResponse(JSON.parse(result));
       setLoading(false);
     } catch (error) {
       setMassege("Failed");
