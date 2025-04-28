@@ -102,7 +102,7 @@ const DashboardPage = () => {
     setCheckout(status);
   };
   const { cart }: any = useCart();
-  const { Logout }: any = useAuth();
+  const { Logout, deleteAccount }: any = useAuth();
   return (
     <>
       <div className={cartPage ? "cart active" : "cart"}>
@@ -140,7 +140,7 @@ const DashboardPage = () => {
             Logout
             <FontAwesomeIcon icon={faRightToBracket} />
           </button>
-          <button type="button">
+          <button type="button" onClick={deleteAccount}>
             Delete
             <FontAwesomeIcon icon={faTrash} />
           </button>
