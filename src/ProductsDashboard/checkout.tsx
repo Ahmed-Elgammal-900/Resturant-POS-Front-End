@@ -65,21 +65,20 @@ const Checkout = ({ isActive, setCheckout }: any) => {
     isLoading,
     responseMassege,
     customerNumber,
-    removeMassege,
+    removeResponse,
     payment,
   }: any = useCart();
+
+  const handleCheckoutPage = () => {
+    setCheckout(false);
+    removeResponse();
+  };
 
   return (
     <>
       <div className={isActive ? "checkout active" : "checkout"}>
         <div className="close-frame">
-          <button
-            onClick={() => {
-              setCheckout(false);
-              removeMassege();
-            }}
-            className="close"
-          >
+          <button onClick={handleCheckoutPage} className="close">
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
