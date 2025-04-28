@@ -125,7 +125,14 @@ const DashboardPage = () => {
             EGP
           </span>
         </div>
-        <button className="payment" onClick={() => handleCheckout(true)}>
+        <button
+          className="payment"
+          onClick={() => handleCheckout(true)}
+          disabled={cart.reduce(
+            (acc: number, { count, price }: any) => acc + price * count,
+            0
+          ) === 0}
+        >
           Payment
         </button>
       </div>
