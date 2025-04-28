@@ -1,9 +1,14 @@
-import { faCreditCard, faXmark } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCreditCard,
+  faSpinner,
+  faXmark,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import "../css/Checkout.css";
 import visa from "../CardsLogo/Visa_Brandmark_Blue_RGB_2021.png";
 import mastercard from "../CardsLogo/ma_symbol.svg";
+import { useCart } from "../Utils/Cart";
 
 type CardType = "visa" | "mastercard" | "inValid";
 
@@ -56,59 +61,83 @@ const Checkout = ({ isActive, setCheckout }: any) => {
     target.value = value;
   };
 
+  const { isLoading, responseMassege, customerNumber, removeMassege }: any =
+    useCart();
+
   return (
     <>
       <div className={isActive ? "checkout active" : "checkout"}>
         <div className="close-frame">
-          <button onClick={() => setCheckout(false)} className="close">
+          <button
+            onClick={() => {
+              setCheckout(false);
+              removeMassege();
+            }}
+            className="close"
+          >
             <FontAwesomeIcon icon={faXmark} />
           </button>
         </div>
-        <h2>Payment</h2>
-
-        <div className="card-inputs">
-          <div className="card-number">
-            <label htmlFor="card-number">Card</label>
-            <div className="input">
-              <input
-                type="text"
-                name="card-number"
-                id="card-number"
-                onInput={handleInput}
-                placeholder="eg. 1234-xxxx-xxxx-xxxx"
-              />
-              <span style={{ display: "inline-flex" }}>
-                {validCard ? (
-                  <img
-                    src={Logos[card as keyof LogosType]}
-                    alt="logo"
-                    width={card === "visa" ? "40px" : "30px"}
-                  />
-                ) : (
-                  <FontAwesomeIcon icon={faCreditCard} />
-                )}
-              </span>
+        <h2 style={{ display: responseMassege !== "" ? "none" : "block" }}>
+          Payment
+        </h2>
+        {responseMassege == "" &&
+          (isLoading ? (
+            <div className="spinner">
+              <FontAwesomeIcon icon={faSpinner} spinPulse />
             </div>
+          ) : (
+            <div className="card-inputs">
+              <div className="card-number">
+                <label htmlFor="card-number">Card</label>
+                <div className="input">
+                  <input
+                    type="text"
+                    name="card-number"
+                    id="card-number"
+                    onInput={handleInput}
+                    placeholder="eg. 1234-xxxx-xxxx-xxxx"
+                  />
+                  <span style={{ display: "inline-flex" }}>
+                    {validCard ? (
+                      <img
+                        src={Logos[card as keyof LogosType]}
+                        alt="logo"
+                        width={card === "visa" ? "40px" : "30px"}
+                      />
+                    ) : (
+                      <FontAwesomeIcon icon={faCreditCard} />
+                    )}
+                  </span>
+                </div>
+              </div>
+              <div className="expire">
+                <label htmlFor="expire">Expiration</label>
+                <input type="month" name="expire" id="expire" required />
+              </div>
+              <div className="cvv">
+                <label htmlFor="cvv">CVV</label>
+                <input
+                  type="text"
+                  name="cvv"
+                  id="cvv"
+                  maxLength={3}
+                  placeholder="eg. 123"
+                  required
+                />
+              </div>
+              <button type="button" disabled={!validCard}>
+                Pay
+              </button>
+            </div>
+          ))}
+        {responseMassege !== "" ? (
+          <div className="order-info">
+            <h1>Number</h1>
+            <h2>{customerNumber}</h2>
+            <p>{responseMassege}</p>
           </div>
-          <div className="expire">
-            <label htmlFor="expire">Expiration</label>
-            <input type="month" name="expire" id="expire" required />
-          </div>
-          <div className="cvv">
-            <label htmlFor="cvv">CVV</label>
-            <input
-              type="text"
-              name="cvv"
-              id="cvv"
-              maxLength={3}
-              placeholder="eg. 123"
-              required
-            />
-          </div>
-          <button type="button" disabled={!validCard}>
-            Pay
-          </button>
-        </div>
+        ) : null}
       </div>
     </>
   );

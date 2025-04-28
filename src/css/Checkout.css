@@ -125,3 +125,47 @@
     cursor: not-allowed;
     background-color: gray;
 }
+
+.spinner{
+  font-size: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30%;
+  color: black;
+}
+
+.order-info{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.order-info h1{
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.order-info h2{
+  font-family: 'poppins';
+  margin-top: 40px;
+  border: 3px solid black;
+  padding: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.order-info p{
+  font-family: 'poppins';
+  font-size: 22px;
+  font-weight: 600;
+}

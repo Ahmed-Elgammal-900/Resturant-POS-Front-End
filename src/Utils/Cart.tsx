@@ -26,6 +26,9 @@ export const Cart = ({ children }: any) => {
     localStorage.setItem("cart", JSON.stringify(cart));
   }, [cart]);
 
+  const [isLoading, setLoading] = useState(false);
+  const [responseMassege, setResponse] = useState("");
+
   const addToCart = ({ name, price }: any) => {
     const exist = cart.some(({ name: name1 }: any) => name1 === name);
     if (exist) {
@@ -64,19 +67,36 @@ export const Cart = ({ children }: any) => {
     );
   };
 
-  // const payment = () => {};
+  const [customerNumber, setNumber] = useState(0);
 
-  const sendOrder = async () => {
+  const payment = () => {
+    setLoading(true);
+    const customerNumber = Math.ceil(Math.random() * 100);
+    setNumber(customerNumber);
+    const productsToSend = cart.map((product: any) => delete product.price);
+
+    console.log(productsToSend);
+
+    const body = { data: productsToSend, customerNumber: customerNumber };
+    sendOrder(body);
+  };
+
+  const removeResponse = () => {
+    setResponse("");
+  };
+
+  const sendOrder = async (body: any) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
         method: "POST",
-        body: JSON.stringify(cart),
+        body: JSON.stringify(body),
         credentials: "include",
       });
 
       const result = await response.json();
-
-      setMassege(result);
+      setCart([]);
+      setResponse(result);
+      setLoading(false);
     } catch (error) {
       setMassege("Failed");
       console.error(error);
@@ -91,7 +111,11 @@ export const Cart = ({ children }: any) => {
         addToCart: addToCart,
         increaseCount: increaseCount,
         decreaseCount: decreaseCount,
-        sendOrder: sendOrder,
+        payment: payment,
+        isLoading: isLoading,
+        responseMassege: responseMassege,
+        customerNumber: customerNumber,
+        removeResponse: removeResponse,
       }}
     >
       {children}
