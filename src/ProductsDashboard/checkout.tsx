@@ -72,6 +72,7 @@ const Checkout = ({ isActive, setCheckout }: any) => {
   const handleCheckoutPage = () => {
     setCheckout(false);
     removeResponse();
+    setValid(false)
   };
 
   return (
