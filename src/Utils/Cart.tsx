@@ -92,7 +92,7 @@ export const Cart = ({ children }: any) => {
         credentials: "include",
       });
 
-      const result = await response.json();
+      const result = await response.text();
       setCart([]);
       setResponse(result);
       setLoading(false);
