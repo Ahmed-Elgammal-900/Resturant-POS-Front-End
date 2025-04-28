@@ -64,7 +64,7 @@ export const Cart = ({ children }: any) => {
     );
   };
 
-  const payment = () => {};
+  // const payment = () => {};
 
   const sendOrder = async () => {
     try {
