@@ -25,10 +25,10 @@ const Kitchen = () => {
       });
 
       const { orders, ordersIDs } = await response.json();
-      console.log(orders);
       const ordersState = ordersIDs.map(({ order_id: main }: any) =>
         orders.filter(({ order_id }: any) => order_id === main)
       );
+      console.log(ordersState)
       const final = ordersState.map((array: any, i: number) => [
         ...array,
         ordersIDs[i],
