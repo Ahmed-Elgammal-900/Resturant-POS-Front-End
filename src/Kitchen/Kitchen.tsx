@@ -8,57 +8,59 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useAuth } from "../Utils/Auth";
-import { io, Socket } from "socket.io-client";
 
 const Kitchen = () => {
   const [optionsPage, setOptions] = useState(false);
   const [overlay, setOverlay] = useState(false);
-  const [socket, setSocket] = useState<Socket | null>(null);
   const [ordersShow, setOrders] = useState<any>([]);
   useEffect(() => {
-    const socketInstance = io(import.meta.env.VITE_API_URL, {
-      transports: ["websocket"],
-      withCredentials: true,
-    });
+    getOrders();
+  }, []);
 
-    setSocket(socketInstance);
-    socketInstance.on("connect", () => {
-      console.log("Connected!", socketInstance.id);
-    });
+  const getOrders = async () => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
+        method: "GET",
+        credentials: "include",
+      });
 
-    socketInstance.on("ordersList", (orders, ordersIDs) => {
+      const { orders, ordersIDs } = await response.json();
       const ordersState = ordersIDs.map(({ order_id: main }: any) =>
         orders.filter(({ order_id }: any) => order_id === main)
       );
-
       const final = ordersState.map((array: any, i: number) => [
         ...array,
         ordersIDs[i],
       ]);
       setOrders(final);
-    });
-
-    socketInstance.on("new order", (data, orderID) => {
-      setOrders((prev: any) => [...prev, [...data, orderID]]);
-    });
-
-    return () => {
-      socketInstance.disconnect();
-    };
-  }, []);
+    } catch (error) {
+      console.error;
+    }
+  };
 
   useEffect(() => {
     console.log(ordersShow);
   }, [ordersShow]);
 
-  const finishOrder = (orderID: string, orderIndex: number) => {
-    if (socket) {
-      socket.emit("finishOrder", orderID);
+  const finishOrder = async (orderID: string, orderIndex: number) => {
+    try {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
+        method: "POST",
+        body: JSON.stringify({ orderID: orderID }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      });
+      console.log(response);
       setOrders((prev: any) =>
         prev.filter((_: any, index: number) => index !== orderIndex)
       );
+    } catch (error) {
+      console.error(error);
     }
   };
+
   const handleOverlay = () => {
     setOverlay((prev) => !prev);
   };
