@@ -45,7 +45,7 @@ const Kitchen = () => {
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/orders/finishOrder`, {
         method: "POST",
-        body: JSON.stringify({ orderID: orderID }),
+        body: JSON.stringify(orderID),
         headers: {
           "Content-Type": "application/json",
         },
