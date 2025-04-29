@@ -149,7 +149,7 @@ const Checkout = ({ isActive, setCheckout }: any) => {
                   required
                 />
               </div>
-              <button type="button" disabled={allFilled && !validCard} onClick={payment}>
+              <button type="button" disabled={allFilled && validCard} onClick={payment}>
                 Pay
               </button>
             </div>
