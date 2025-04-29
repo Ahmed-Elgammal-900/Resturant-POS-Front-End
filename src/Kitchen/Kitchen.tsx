@@ -25,6 +25,7 @@ const Kitchen = () => {
       });
 
       const { orders, ordersIDs } = await response.json();
+      console.log(orders);
       const ordersState = ordersIDs.map(({ order_id: main }: any) =>
         orders.filter(({ order_id }: any) => order_id === main)
       );
@@ -32,8 +33,6 @@ const Kitchen = () => {
         ...array,
         ordersIDs[i],
       ]);
-
-      console.log(final);
       setOrders(final);
     } catch (error) {
       console.error;
