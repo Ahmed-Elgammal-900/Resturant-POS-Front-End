@@ -85,7 +85,6 @@ const Checkout = ({ isActive, setCheckout }: any) => {
   };
 
   const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "");
-  console.log(allFilled)
   return (
     <>
       <div className={isActive ? "checkout active" : "checkout"}>
@@ -149,7 +148,7 @@ const Checkout = ({ isActive, setCheckout }: any) => {
                   required
                 />
               </div>
-              <button type="button" disabled={allFilled && validCard} onClick={payment}>
+              <button type="button" disabled={!allFilled && !validCard} onClick={payment}>
                 Pay
               </button>
             </div>
