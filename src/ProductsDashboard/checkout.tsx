@@ -85,7 +85,7 @@ const Checkout = ({ isActive, setCheckout }: any) => {
   };
 
   const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "");
-
+  console.log(allFilled)
   return (
     <>
       <div className={isActive ? "checkout active" : "checkout"}>
