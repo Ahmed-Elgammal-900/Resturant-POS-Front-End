@@ -1,7 +1,7 @@
 import Kitchen from "../Kitchen/Kitchen";
 import ManagerSystem from "../ManagerSystem/ManagerDashboard";
 import DashboardPage from "../ProductsDashboard/DashboardPage";
-import { Auth, useAuth } from "./Auth";
+import { useAuth } from "./Auth";
 import { Navigate } from "react-router-dom";
 import { Cart } from "./Cart";
 const ProtectedRoute = () => {
