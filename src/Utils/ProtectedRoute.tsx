@@ -14,12 +14,7 @@ const ProtectedRoute = () => {
       </Cart>
     );
   if (user === "manager") return <ManagerSystem />;
-  if (user === "chief")
-    return (
-      <Auth>
-        <Kitchen />
-      </Auth>
-    );
+  if (user === "chief") return <Kitchen />;
 };
 
 export default ProtectedRoute;
