@@ -25,6 +25,7 @@ const Logos: LogosType = {
 const Checkout = ({ isActive, setCheckout }: any) => {
   const [card, setCard] = useState<CardType>("inValid");
   const [validCard, setValid] = useState(false);
+  const [inputs, setInputs] = useState({ expiration: "", cvv: 0 });
   const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
 
@@ -72,8 +73,18 @@ const Checkout = ({ isActive, setCheckout }: any) => {
   const handleCheckoutPage = () => {
     setCheckout(false);
     removeResponse();
-    setValid(false)
+    setValid(false);
   };
+
+  const handleInputChange = (e: any) => {
+    const { name, value } = e.target;
+    setInputs((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "");
 
   return (
     <>
@@ -118,7 +129,13 @@ const Checkout = ({ isActive, setCheckout }: any) => {
               </div>
               <div className="expire">
                 <label htmlFor="expire">Expiration</label>
-                <input type="month" name="expire" id="expire" required />
+                <input
+                  type="month"
+                  name="expiration"
+                  id="expire"
+                  onChange={handleInputChange}
+                  required
+                />
               </div>
               <div className="cvv">
                 <label htmlFor="cvv">CVV</label>
@@ -127,11 +144,12 @@ const Checkout = ({ isActive, setCheckout }: any) => {
                   name="cvv"
                   id="cvv"
                   maxLength={3}
+                  onChange={handleInputChange}
                   placeholder="eg. 123"
                   required
                 />
               </div>
-              <button type="button" disabled={!validCard} onClick={payment}>
+              <button type="button" disabled={allFilled && !validCard} onClick={payment}>
                 Pay
               </button>
             </div>
