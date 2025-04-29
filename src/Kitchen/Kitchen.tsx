@@ -12,7 +12,7 @@ import { useAuth } from "../Utils/Auth";
 const Kitchen = () => {
   const [optionsPage, setOptions] = useState(false);
   const [overlay, setOverlay] = useState(false);
-  const [ordersShow, setOrders] = useState<any>([]);
+  const [ordersShow, setOrders] = useState([]);
   useEffect(() => {
     getOrders();
   }, []);
@@ -32,6 +32,8 @@ const Kitchen = () => {
         ...array,
         ordersIDs[i],
       ]);
+
+      console.log(final);
       setOrders(final);
     } catch (error) {
       console.error;
