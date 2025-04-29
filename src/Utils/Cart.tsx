@@ -73,7 +73,6 @@ export const Cart = ({ children }: any) => {
     setLoading(true);
     const customerNumber = Math.ceil(Math.random() * 100);
     setNumber(customerNumber);
-    cart.forEach((product: any) => delete product.price);
 
     const body = { data: cart, customerNumber: customerNumber };
     sendOrder(body);
