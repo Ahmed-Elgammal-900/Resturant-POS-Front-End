@@ -349,6 +349,12 @@
   cursor: pointer;
 }
 
+.payment:disabled{
+  background-color: gray;
+  cursor: not-allowed;
+  
+}
+
 .close-cart {
   width: 30px;
   height: 30px;
