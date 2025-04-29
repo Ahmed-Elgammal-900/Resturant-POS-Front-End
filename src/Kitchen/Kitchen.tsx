@@ -31,6 +31,7 @@ const Kitchen = () => {
 
       const final = ordersState.map((array: any, i: number) => [
         ...array,
+        array[0].number,
         orderIDs[i],
       ]);
 
@@ -103,6 +104,7 @@ const Kitchen = () => {
         {ordersShow.map((array: any, orderIndex: number) => (
           <div className="invoice">
             <h2>{orderIndex + 1}</h2>
+            <h3>customer number:{array[array.length - 2]}</h3>
             <div className="orderinfo">
               {array.map(({ name, count }: any) => (
                 <>
