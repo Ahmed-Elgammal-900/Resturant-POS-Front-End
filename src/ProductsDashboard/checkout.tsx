@@ -84,7 +84,7 @@ const Checkout = ({ isActive, setCheckout }: any) => {
     }));
   };
 
-  const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "");
+  const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "") && inputs.cvv.length === 3;
   return (
     <>
       <div className={isActive ? "checkout active" : "checkout"}>
