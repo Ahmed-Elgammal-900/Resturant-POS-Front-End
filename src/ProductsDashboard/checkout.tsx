@@ -84,7 +84,7 @@ const Checkout = ({ isActive, setCheckout }: any) => {
     }));
   };
 
-  const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "");
+  const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "" || 0);
 
   return (
     <>
