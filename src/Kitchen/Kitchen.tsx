@@ -41,7 +41,6 @@ const Kitchen = () => {
   };
 
   const finishOrder = async (orderID: string, orderIndex: number) => {
-    console.log(orderID)
     try {
       await fetch(`${import.meta.env.VITE_API_URL}/orders/finishOrder`, {
         method: "POST",
