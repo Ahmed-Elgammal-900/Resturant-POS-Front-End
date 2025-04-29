@@ -25,7 +25,7 @@ const Logos: LogosType = {
 const Checkout = ({ isActive, setCheckout }: any) => {
   const [card, setCard] = useState<CardType>("inValid");
   const [validCard, setValid] = useState(false);
-  const [inputs, setInputs] = useState({ expiration: "", cvv: 0 });
+  const [inputs, setInputs] = useState({ expiration: "", cvv: "" });
   const handleInput = (e: React.FormEvent<HTMLInputElement>) => {
     const target = e.currentTarget;
 
@@ -84,7 +84,7 @@ const Checkout = ({ isActive, setCheckout }: any) => {
     }));
   };
 
-  const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "" || 0);
+  const allFilled = Object.values(inputs).every((value: any) => value.trim() !== "");
 
   return (
     <>
