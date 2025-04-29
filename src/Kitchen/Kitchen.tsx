@@ -40,10 +40,6 @@ const Kitchen = () => {
     }
   };
 
-  useEffect(() => {
-    console.log(ordersShow);
-  }, [ordersShow]);
-
   const finishOrder = async (orderID: string, orderIndex: number) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
