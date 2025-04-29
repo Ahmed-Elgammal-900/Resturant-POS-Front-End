@@ -28,7 +28,7 @@ const Kitchen = () => {
       const ordersState = ordersIDs.map(({ order_id: main }: any) =>
         orders.filter(({ order_id }: any) => order_id === main)
       );
-      console.log(JSON.stringify(ordersState));
+      console.log(JSON.stringify(ordersState, null, 2));
       const final = ordersState.map((array: any, i: number) => [
         ...array,
         ordersIDs[i],
