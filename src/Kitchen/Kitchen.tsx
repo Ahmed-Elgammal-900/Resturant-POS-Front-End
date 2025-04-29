@@ -25,10 +25,25 @@ const Kitchen = () => {
       });
 
       const { orders, ordersIDs } = await response.json();
-      const ordersState = ordersIDs.map(({ order_id: main }: any) =>
-        orders.filter(({ order_id }: any) => order_id == main)
-      );
-      console.log(JSON.stringify(ordersState, null, 2));
+      // const ordersState = ordersIDs.map(({ order_id: main }: any) =>
+      //   orders.filter(({ order_id }: any) => order_id == main)
+      // );
+      // console.log(JSON.stringify(ordersState, null, 2));
+      // const final = ordersState.map((array: any, i: number) => [
+      //   ...array,
+      //   ordersIDs[i],
+      // ]);
+
+      const ordersState = ordersIDs.map(({ order_id: main }: any) => {
+        console.log("Looking for order_id:", main);
+        const filtered = orders.filter(({ order_id }: any) => {
+          console.log(`Comparing ${order_id} == ${main}: ${order_id == main}`);
+          return order_id == main;
+        });
+        console.log(`Found ${filtered.length} matches for ${main}`);
+        return filtered;
+      });
+
       const final = ordersState.map((array: any, i: number) => [
         ...array,
         ordersIDs[i],
