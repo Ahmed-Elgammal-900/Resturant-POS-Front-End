@@ -1,0 +1,81 @@
+.orders-content{
+    display: grid;
+    place-content: center;
+    justify-items: center;
+    grid-template-columns: auto auto auto;
+    padding-top: 60px;
+    padding-bottom: 50px;
+    column-gap: 110px;
+    row-gap: 80px;
+}
+
+.orders-content .invoice{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 500px;
+    width: 230px;
+    box-shadow: 0 3px 20px 3px rgba(0, 0, 0, 0.15);
+    padding-bottom: 20px !important;
+    padding-left: 20px;
+    padding-right: 20px;
+    position: relative;
+}
+
+.orders-content .invoice .order-invoice-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orders-content .invoice h2{
+    color: white;
+    padding: 2px 0px;
+    padding-left: 20px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    width: 250px;
+    left: 0;
+}
+
+.orders-content .invoice h3{
+    font-size: 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 70px;
+    margin-bottom: 50px;
+}
+
+.fields h4{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.order-info-text .name, .order-info-text .count{
+    font-size: 16px;
+    font-family: 'poppins';
+    font-weight: 500;
+}
+
+.finish-order{
+    height: 35px;
+    border-radius: 40px;
+    -webkit-border-radius: 40px;
+    -moz-border-radius: 40px;
+    -ms-border-radius: 40px;
+    -o-border-radius: 40px;
+    border: 2px solid rgb(0, 154, 0);
+    color: rgb(0, 154, 0);
+    background-color: transparent;
+    font-family: 'poppins';
+    font-weight: 500;
+}
+
+.finish-order:hover{
+    cursor: pointer;
+    background-color: rgb(0, 154, 0);
+    color: white;
+}

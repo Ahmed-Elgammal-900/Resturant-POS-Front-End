@@ -8,11 +8,12 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useAuth } from "../Utils/Auth";
+import '../css/Kitchen.css'
 
 const Kitchen = () => {
   const [optionsPage, setOptions] = useState(false);
   const [overlay, setOverlay] = useState(false);
-  const [ordersShow, setOrders] = useState([]);
+  const [ordersShow, setOrders] = useState<any>([]);
   useEffect(() => {
     getOrders();
   }, []);
@@ -67,6 +68,17 @@ const Kitchen = () => {
     handleOverlay();
   };
 
+  const colors = ["green", "blue", "red"];
+
+  const shuffle = (arr: any) => {
+    const copy = [...arr];
+    for (let i = copy.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [copy[i], copy[j]] = [copy[j], copy[i]];
+    }
+    return copy;
+  };
+  const shuffledColors = shuffle(colors);
   const { Logout, deleteAccount }: any = useAuth();
   return (
     <>
@@ -103,19 +115,36 @@ const Kitchen = () => {
       <div className="orders-content">
         {ordersShow.map((array: any, orderIndex: number) => (
           <div className="invoice">
-            <h2>{orderIndex + 1}</h2>
-            <h3>customer number:{array[array.length - 2]}</h3>
-            <div className="orderinfo">
-              {array.map(({ name, count }: any) => (
-                <>
-                  <p className="name">{name}</p>
-                  <p className="count">{count}</p>
-                </>
-              ))}
+            <h2
+              style={{
+                backgroundColor:
+                  shuffledColors[orderIndex % shuffledColors.length],
+              }}
+            >
+              No.{orderIndex + 1}
+            </h2>
+            <div className="invoice-info">
+              <h3>
+                customer number:<span>{array[array.length - 2]}</span>
+              </h3>
+              <div className="fields">
+                <h4>
+                  name<span>count</span>
+                </h4>
+              </div>
+              <div className="order-info-text">
+                {array.map(({ name, count }: any) => (
+                  <div className="order-invoice-info">
+                    <p className="name">{name}</p>
+                    <p className="count" style={{display: "inline-block", marginRight: count >= 10 ? '10px' : '20px'}}>{count}</p>
+                  </div>
+                ))}
+              </div>
             </div>
             <button
               type="button"
               onClick={() => finishOrder(array[array.length - 1], orderIndex)}
+              className="finish-order"
             >
               Done
             </button>
