@@ -22,37 +22,23 @@ const ManagerSystem = () => {
   });
 
   const handleData = async () => {
-    const response1 = await fetch(
+    const urls = [
       `${import.meta.env.VITE_API_URL}/orders/orders-count`,
-      {
-        method: "GET",
-        credentials: "include",
-      }
+      `${import.meta.env.VITE_API_URL}/orders/orders-items`,
+      `${import.meta.env.VITE_API_URL}/orders/finished-orders`,
+    ];
+    const responses = await Promise.all(
+      urls.map((url) => fetch(url, { method: "GET", credentials: "include" }))
     );
-
-    const [{ "count(DISTINCT order_id)": ordersCount }] =
-      await response1.json();
+    const [
+      [{ "count(DISTINCT order_id)": ordersCount }],
+      [{ "count(name)": itemsCount }],
+      { orders },
+    ] = await Promise.all(responses.map((res) => res.json()));
 
     setOrdersCount(ordersCount);
 
-    const response2 = await fetch(
-      `${import.meta.env.VITE_API_URL}/orders/orders-items`,
-      {
-        method: "GET",
-        credentials: "include",
-      }
-    );
-
-    const [{ "count(name)": itemsCount }] = await response2.json();
-
     setOrdersCountItems(itemsCount);
-
-    const response3 = await fetch(`${import.meta.env.VITE_API_URL}/orders/finished-orders`, {
-      method: "GET",
-      credentials: "include",
-    });
-
-    const { orders } = await response3.json();
 
     const totalRevenue = orders.reduce(
       (acc: number, { count, price }: any) => acc + count * price,
