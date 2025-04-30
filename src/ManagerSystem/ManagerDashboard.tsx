@@ -47,7 +47,7 @@ const ManagerSystem = () => {
 
     setOrdersCountItems(itemsCount);
 
-    const response3 = await fetch(`${import.meta.env.VITE_API_URL}/orders`, {
+    const response3 = await fetch(`${import.meta.env.VITE_API_URL}/orders/finished-orders`, {
       method: "GET",
       credentials: "include",
     });
