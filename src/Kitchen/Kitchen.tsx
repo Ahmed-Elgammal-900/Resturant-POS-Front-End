@@ -5,7 +5,7 @@ import {
   faXmark,
   faTrash,
   faRightToBracket,
-  faSpinner
+  faSpinner,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState, useRef } from "react";
 import { useAuth } from "../Utils/Auth";
@@ -93,7 +93,7 @@ const Kitchen = () => {
   };
   const shuffledColors = shuffle(colors);
   const { Logout, deleteAccount }: any = useAuth();
-  return !isLoading ? (
+  return (
     <>
       <div className={overlay ? "overlay active" : "overlay"}></div>
       <div className={optionsPage ? "options active" : "options"}>
@@ -125,64 +125,69 @@ const Kitchen = () => {
           </button>
         </div>
       </div>
-      {ordersShow.length !== 0 ? (
-        <div className="orders-content">
-          {ordersShow.map((array: any, orderIndex: number) => (
-            <div className="invoice">
-              <h2
-                style={{
-                  backgroundColor:
-                    shuffledColors[orderIndex % shuffledColors.length],
-                }}
-              >
-                No.{orderIndex + 1}
-              </h2>
-              <div className="invoice-info">
-                <h3>
-                  customer number:<span>{array[array.length - 2]}</span>
-                </h3>
-                <div className="fields">
-                  <h4>
-                    name<span>count</span>
-                  </h4>
+
+      {!isLoading ? (
+        ordersShow.length !== 0 ? (
+          <div className="orders-content">
+            {ordersShow.map((array: any, orderIndex: number) => (
+              <div className="invoice">
+                <h2
+                  style={{
+                    backgroundColor:
+                      shuffledColors[orderIndex % shuffledColors.length],
+                  }}
+                >
+                  No.{orderIndex + 1}
+                </h2>
+                <div className="invoice-info">
+                  <h3>
+                    customer number:<span>{array[array.length - 2]}</span>
+                  </h3>
+                  <div className="fields">
+                    <h4>
+                      name<span>count</span>
+                    </h4>
+                  </div>
+                  <div className="order-info-text">
+                    {array.map(({ name, count }: any) => (
+                      <div className="order-invoice-info">
+                        <p className="name">{name}</p>
+                        <p
+                          className="count"
+                          style={{
+                            display: "inline-block",
+                            marginRight: count >= 10 ? "10px" : "20px",
+                          }}
+                        >
+                          {count}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
-                <div className="order-info-text">
-                  {array.map(({ name, count }: any) => (
-                    <div className="order-invoice-info">
-                      <p className="name">{name}</p>
-                      <p
-                        className="count"
-                        style={{
-                          display: "inline-block",
-                          marginRight: count >= 10 ? "10px" : "20px",
-                        }}
-                      >
-                        {count}
-                      </p>
-                    </div>
-                  ))}
-                </div>
+                <button
+                  type="button"
+                  onClick={() =>
+                    finishOrder(array[array.length - 1], orderIndex)
+                  }
+                  className="finish-order"
+                >
+                  Done
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={() => finishOrder(array[array.length - 1], orderIndex)}
-                className="finish-order"
-              >
-                Done
-              </button>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        ) : (
+          <div className="no-orders-massege">
+            <p>No Orders To Make</p>
+          </div>
+        )
       ) : (
-        <div className="no-orders-massege">
-          <p>No Orders To Make</p>
+        <div className="loader-spinner">
+          <FontAwesomeIcon icon={faSpinner} pulse />
         </div>
       )}
     </>
-  ) : (
-    <div className="loader-spinner">
-      <FontAwesomeIcon icon={faSpinner} pulse />
-    </div>
   );
 };
 
