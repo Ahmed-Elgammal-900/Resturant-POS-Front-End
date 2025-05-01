@@ -47,7 +47,7 @@ const ManagerSystem = () => {
       );
       const [
         [{ "count(DISTINCT order_id)": ordersCount }],
-        [{ "count(name)": itemsCount }],
+        [{ "SUM(`count`)": itemsCount }],
         { orders },
       ] = await Promise.all(responses.map((res) => res.json()));
 
