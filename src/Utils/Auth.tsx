@@ -24,8 +24,8 @@ const AuthContext = createContext<AuthContextType>({
 export const useAuth = () => useContext<AuthContextType>(AuthContext);
 
 export const Auth = ({ children }: any) => {
-  const [isAuth, setAuth] = useState<boolean>(false);
-  const [user, setUser] = useState<string>("");
+  const [isAuth, setAuth] = useState<boolean>(!false);
+  const [user, setUser] = useState<string>("chief");
   const [massege, setMassege] = useState<string>("");
   useEffect(() => {
     checkAuth();
@@ -48,8 +48,8 @@ export const Auth = ({ children }: any) => {
       }
     } catch (error: any) {
       console.error(error);
-      setAuth(false);
-      setUser("");
+      // setAuth(false);
+      // setUser("");
     }
   };
 

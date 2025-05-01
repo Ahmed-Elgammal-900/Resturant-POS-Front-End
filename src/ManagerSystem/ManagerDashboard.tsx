@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useAuth } from "../Utils/Auth";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import {
   faBriefcase,
   faBars,
@@ -24,7 +24,14 @@ const ManagerSystem = () => {
     handleData();
   }, []);
 
+  const isFirstRun = useRef(true);
+
   useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+    
     setLoading(false);
   }, [ordersCountItems]);
 
@@ -110,7 +117,7 @@ const ManagerSystem = () => {
             </div>
             <div className="nested-block2">
               <h3>Revenue</h3>
-              <p>{revenue.toLocaleString()}</p>
+              <p>{revenue.toLocaleString()} EGP</p>
             </div>
           </div>
         </div>

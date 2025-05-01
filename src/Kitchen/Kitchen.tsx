@@ -8,7 +8,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
 import { useAuth } from "../Utils/Auth";
-import '../css/Kitchen.css'
+import "../css/Kitchen.css";
 
 const Kitchen = () => {
   const [optionsPage, setOptions] = useState(false);
@@ -112,45 +112,59 @@ const Kitchen = () => {
           </button>
         </div>
       </div>
-      <div className="orders-content">
-        {ordersShow.map((array: any, orderIndex: number) => (
-          <div className="invoice">
-            <h2
-              style={{
-                backgroundColor:
-                  shuffledColors[orderIndex % shuffledColors.length],
-              }}
-            >
-              No.{orderIndex + 1}
-            </h2>
-            <div className="invoice-info">
-              <h3>
-                customer number:<span>{array[array.length - 2]}</span>
-              </h3>
-              <div className="fields">
-                <h4>
-                  name<span>count</span>
-                </h4>
+      {ordersShow.length !== 0 ? (
+        <div className="orders-content">
+          {ordersShow.map((array: any, orderIndex: number) => (
+            <div className="invoice">
+              <h2
+                style={{
+                  backgroundColor:
+                    shuffledColors[orderIndex % shuffledColors.length],
+                }}
+              >
+                No.{orderIndex + 1}
+              </h2>
+              <div className="invoice-info">
+                <h3>
+                  customer number:<span>{array[array.length - 2]}</span>
+                </h3>
+                <div className="fields">
+                  <h4>
+                    name<span>count</span>
+                  </h4>
+                </div>
+                <div className="order-info-text">
+                  {array.map(({ name, count }: any) => (
+                    <div className="order-invoice-info">
+                      <p className="name">{name}</p>
+                      <p
+                        className="count"
+                        style={{
+                          display: "inline-block",
+                          marginRight: count >= 10 ? "10px" : "20px",
+                        }}
+                      >
+                        {count}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
-              <div className="order-info-text">
-                {array.map(({ name, count }: any) => (
-                  <div className="order-invoice-info">
-                    <p className="name">{name}</p>
-                    <p className="count" style={{display: "inline-block", marginRight: count >= 10 ? '10px' : '20px'}}>{count}</p>
-                  </div>
-                ))}
-              </div>
+              <button
+                type="button"
+                onClick={() => finishOrder(array[array.length - 1], orderIndex)}
+                className="finish-order"
+              >
+                Done
+              </button>
             </div>
-            <button
-              type="button"
-              onClick={() => finishOrder(array[array.length - 1], orderIndex)}
-              className="finish-order"
-            >
-              Done
-            </button>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <div className="no-orders-massege">
+          <p>No Orders To Make</p>
+        </div>
+      )}
     </>
   );
 };
