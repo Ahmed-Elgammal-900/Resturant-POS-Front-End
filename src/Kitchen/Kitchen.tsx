@@ -5,8 +5,9 @@ import {
   faXmark,
   faTrash,
   faRightToBracket,
+  faSpinner
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useAuth } from "../Utils/Auth";
 import "../css/Kitchen.css";
 
@@ -14,9 +15,21 @@ const Kitchen = () => {
   const [optionsPage, setOptions] = useState(false);
   const [overlay, setOverlay] = useState(false);
   const [ordersShow, setOrders] = useState<any>([]);
+  const [isLoading, setLoading] = useState(true);
   useEffect(() => {
     getOrders();
   }, []);
+
+  const isFirstRun = useRef(true);
+
+  useEffect(() => {
+    if (isFirstRun.current) {
+      isFirstRun.current = false;
+      return;
+    }
+
+    setLoading(false);
+  }, [ordersShow]);
 
   const getOrders = async () => {
     try {
@@ -80,7 +93,7 @@ const Kitchen = () => {
   };
   const shuffledColors = shuffle(colors);
   const { Logout, deleteAccount }: any = useAuth();
-  return (
+  return !isLoading ? (
     <>
       <div className={overlay ? "overlay active" : "overlay"}></div>
       <div className={optionsPage ? "options active" : "options"}>
@@ -166,6 +179,10 @@ const Kitchen = () => {
         </div>
       )}
     </>
+  ) : (
+    <div className="loader-spinner">
+      <FontAwesomeIcon icon={faSpinner} pulse />
+    </div>
   );
 };
 
